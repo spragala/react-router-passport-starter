@@ -8,6 +8,4 @@ var TextPostSchema = new Schema({
   votes: Number
 });
 
-var TextPost = mongoose.model('TextPost', TextPostSchema);
-
-module.exports = TextPost;
+module.exports = mongoose.model('TextPost', TextPostSchema);
