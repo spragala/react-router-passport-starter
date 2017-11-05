@@ -1,6 +1,8 @@
 const express = require('express'),
       app = express(),
-      backendRouter = require('./config/routes.js');
+      bodyParser = require('body-parser'),
+      backendRouter = require('./config/routes.js'),
+      expressValidator = require('express-validator');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -8,6 +10,9 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
   next();
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 app.use(backendRouter);
 
