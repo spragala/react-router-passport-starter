@@ -5,6 +5,7 @@ var express = require('express'),
 
 //User Routes
 router.post('/signup', usersController.create);
+router.post('/login', usersController.login);
 
 //Post Routes
 router.get('/api/posts', textPostsController.index);
