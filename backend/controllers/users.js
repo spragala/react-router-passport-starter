@@ -52,7 +52,9 @@ passport.use(new LocalStrategy(
       }
 
       User.comparePassword(password, user.password, function (err, isMatch) {
-        if (err) throw err;
+        console.log("this is the password: ", password)
+        if (err) { return done(err); }
+
         if (isMatch) {
           return done(null, user);
         } else {
@@ -77,16 +79,18 @@ passport.deserializeUser(function (id, done) {
 });
 
 function login (req, res, next) {
-  return passport.authenticate('local', (err) => {
+  return passport.authenticate('local', (err, user) => {
     if (err) {
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: 'Could not process the form.',
+        error: err
       });
     }
     return res.status(200).json({
       success: true,
-      message: 'You did it!'
+      message: 'You did it!',
+      user: user
     })
   })(req, res, next);
 }
