@@ -42,25 +42,19 @@ function create (req, res) {
 passport.use(new LocalStrategy(
 
   function (username, password, done) {
-    console.log("this is the user: ", username)
     User.getUserByUsername(username, function (err, user) {
-      if (err) throw err;
+      if (err) { return done(err); }
       if (!user) {
-        return done(null, false, {
-          message: 'Unknown User',
-        });
+        return done(null, false);
       }
 
       User.comparePassword(password, user.password, function (err, isMatch) {
-        console.log("this is the password: ", password)
         if (err) { return done(err); }
 
         if (isMatch) {
           return done(null, user);
         } else {
-          return done(null, false, {
-            message: 'Invalid password',
-          });
+          return done(null, false);
         }
       });
     });
@@ -87,9 +81,15 @@ function login (req, res, next) {
         error: err
       });
     }
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Incorrect username or password'
+      })
+    }
     return res.status(200).json({
       success: true,
-      message: 'You did it!',
+      message: 'Login successful!',
       user: user
     })
   })(req, res, next);
