@@ -1,10 +1,11 @@
 import axios from 'axios'
 
+
+
 export default class UserModel {
 
   static post(user) {
-    console.log('The object I am sending', user)
-    let request = axios.post(`http://localhost:8080/login`, user)
+    let request = axios.post(`/login/?${user}`, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
     return request
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Users from '../models/Users'
 
 export default class Login extends Component{
   constructor(){
@@ -22,8 +23,17 @@ export default class Login extends Component{
 
   onFormSubmit(e) {
     e.preventDefault()
-    let user = this.state
-    console.log('Form Submitted with this user: ', user)
+    const username = encodeURIComponent(this.state.username);
+    const password = encodeURIComponent(this.state.password);
+    const formData = `username=${username}&password=${password}`;
+
+    Users.post(formData).then( (res) => {
+      if (res.status === 400) {
+        console.log(res.data.message)
+      }
+      console.log(res.data.message)
+    })
+
     this.setState({
       username: '',
       password: ''
