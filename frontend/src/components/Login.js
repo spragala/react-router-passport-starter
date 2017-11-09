@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Users from '../models/Users'
+import Auth from '../models/Auth'
 
 export default class Login extends Component{
   constructor(){
@@ -28,10 +29,14 @@ export default class Login extends Component{
     const formData = `username=${username}&password=${password}`;
 
     Users.post(formData).then( (res) => {
-      if (res.status === 400) {
+      console.log(res.data)
+      if (res.data.success === false) {
         console.log(res.data.message)
+      } else {
+        console.log(res.data.message)
+        Auth.authenticateUser(res.data.user, res.data.user._id)  
       }
-      console.log(res.data.message)
+
     })
 
     this.setState({
