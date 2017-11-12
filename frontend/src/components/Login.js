@@ -10,15 +10,11 @@ export default class Login extends Component{
         username: '',
         password: ''
       }
-
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
-
-
   handleChange(field) {
-
     return (e) => {
       const user = this.state.user
       user[field] = e.target.value
@@ -34,25 +30,16 @@ export default class Login extends Component{
     const password = encodeURIComponent(this.state.user.password);
     const formData = `username=${username}&password=${password}`;
 
-    console.log(this.state.user)
-
     Users.post(formData).then( (res) => {
-      console.log(res.data)
       if (res.data.success === false) {
-        console.log(res.data.message)
       } else {
-        console.log(res.data.message)
         Auth.authenticateUser(res.data.user, res.data.user._id)
       }
       const user = res.data.user
       this.setState({
         user
       })
-
     })
-
-
-
   };
 
   render(){
