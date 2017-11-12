@@ -82,7 +82,7 @@ function login (req, res, next) {
       });
     }
     if (!user) {
-      return res.status(200).json({
+      return res.json({
         success: false,
         message: 'Incorrect username or password'
       })

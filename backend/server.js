@@ -14,14 +14,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true,
 }));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressValidator());
