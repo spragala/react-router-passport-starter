@@ -90,6 +90,10 @@ function login (req, res, next) {
         message: 'Incorrect username or password'
       })
     }
+    req.logIn(user, function(err) {
+      if (err) return next(err);
+    })
+    console.log(req.session)
     return res.status(200).json({
       success: true,
       message: 'Login successful!',
