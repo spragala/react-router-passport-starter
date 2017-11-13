@@ -18,7 +18,9 @@ const UserSchema = new Schema({
   }
 });
 
-var User = module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('User', UserSchema);
+
+// From Brad Traversy https://github.com/bradtraversy/
 
 module.exports.createUser = function (newUser, callback) {
   bcrypt.genSalt(10, function (err, salt) {
