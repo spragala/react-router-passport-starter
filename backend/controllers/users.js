@@ -40,7 +40,6 @@ function create (req, res) {
 }; // <-- create
 
 passport.use(new LocalStrategy(
-
   function (username, password, done) {
     User.getUserByUsername(username, function (err, user) {
       if (err) { return done(err); }
@@ -59,18 +58,14 @@ passport.use(new LocalStrategy(
       });
     });
   }
-
 ));
 
 passport.serializeUser(function (user, done) {
-  debugger
-  console.log('serialize user: ', user)
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
   User.getUserById(id, function (err, user) {
-    console.log('deserialize: ', user)
     done(err, user);
   });
 });
@@ -93,11 +88,12 @@ function login (req, res, next) {
     req.logIn(user, function(err) {
       if (err) return next(err);
     })
+
     console.log(req.session)
     return res.status(200).json({
       success: true,
       message: 'Login successful!',
-      user: user
+      user: req.user
     })
   })(req, res, next);
 }

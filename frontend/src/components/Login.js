@@ -3,42 +3,41 @@ import Users from '../models/Users'
 import Auth from '../models/Auth'
 
 export default class Login extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      user: {
-        username: '',
-        password: ''
-      }
+      username: '',
+      password: '',
+      user: {},
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(field) {
     return (e) => {
-      const user = this.state.user
-      user[field] = e.target.value
       this.setState({
-        user
+        [field]: e.target.value
       });
     }
   }
 
   onFormSubmit(e) {
     e.preventDefault()
-    const username = encodeURIComponent(this.state.user.username);
-    const password = encodeURIComponent(this.state.user.password);
+    const username = encodeURIComponent(this.state.username);
+    const password = encodeURIComponent(this.state.password);
     const formData = `username=${username}&password=${password}`;
 
     Users.post(formData).then( (res) => {
       if (res.data.success === false) {
-      } else {
-        Auth.authenticateUser(res.data.user, res.data.user._id)
+        console.log(res.data.message)
+
       }
-      const user = res.data.user
+      
       this.setState({
-        user
+        user: res.data.user
       })
+      console.log(this.state)
+      console.log(this.props)
     })
   };
 
@@ -57,11 +56,7 @@ export default class Login extends Component{
             onChange={ this.handleChange('password') } />
           <button type='submit'>Log In!</button>
         </form>
-        {Auth.isUserAuthenticated(this.state.user) ? (
           <p>Hello {this.state.user.name}</p>
-        ) : (
-          <p>Not Logged in.</p>
-        )}
       </div>
     )
   }
