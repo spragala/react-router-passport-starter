@@ -1,20 +1,22 @@
 export default class Auth {
 
-  static authenticateUser(user, id) {
-    localStorage.setItem('user',user);
-    localStorage.setItem('id', user._id)
+  static authenticateUser(user) {
+    console.log('storing this user: ', user)
+    localStorage.setItem('user', user);
   }
 
-  static isUserAuthenticated(user) {
-    if (localStorage.getItem('id') === user._id) {
-      return true
-    } else
-    return false
-
+  static isUserAuthenticated() {
+    const id = localStorage.getItem('user')
+    console.log("Authed user: ", id)
+    return localStorage.getItem('user') !== null;
   }
 
   static getUser() {
-    return localStorage.getItem('id');
+    return localStorage.getItem('user');
+  }
+
+  static logout() {
+    localStorage.removeItem('user')
   }
 
 }

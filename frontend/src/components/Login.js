@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Users from '../models/Users'
 import Auth from '../models/Auth'
 
+import { Redirect } from 'react-router-dom'
+
 export default class Login extends Component{
   constructor(props){
     super(props);
@@ -9,6 +11,7 @@ export default class Login extends Component{
       username: '',
       password: '',
       user: {},
+      shouldRedirect: false
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -32,9 +35,11 @@ export default class Login extends Component{
         console.log(res.data.message)
 
       }
-      
+      Auth.authenticateUser(res.data.user._id)
+
       this.setState({
-        user: res.data.user
+        user: res.data.user,
+        shouldRedirect: true
       })
       console.log(this.state)
       console.log(this.props)
@@ -42,6 +47,8 @@ export default class Login extends Component{
   };
 
   render(){
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { shouldRedirect } = this.state
     return (
       <div>
         <h1>Login Page</h1>
@@ -56,7 +63,9 @@ export default class Login extends Component{
             onChange={ this.handleChange('password') } />
           <button type='submit'>Log In!</button>
         </form>
-          <p>Hello {this.state.user.name}</p>
+        {shouldRedirect && (
+          <Redirect to={ from } />
+        )}
       </div>
     )
   }
