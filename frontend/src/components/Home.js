@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import Auth from '../models/Auth'
 
+import { Link } from 'react-router-dom'
+
 export default class Home extends Component{
   render(){
     return (
-      <div>
+      <section className="home">
         <h1>Home</h1>
         {Auth.isUserAuthenticated() ? (
-          <p>You are logged in
-          <button onClick={() => {
-            Auth.logout(() => this.history.replace('/'))
-          }}>Sign out</button></p>
+          <p>Welcome, you have successfully logged in.</p>
         ) : (
-          <p>You are logged out</p>
+          <p>You must be logged in to see this content.
+          </p>
         )}
-      </div>
+      </section>
     )
   }
 };

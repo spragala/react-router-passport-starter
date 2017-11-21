@@ -49,6 +49,7 @@ export default class Login extends Component{
   render(){
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { shouldRedirect } = this.state
+    
     return (
       <div>
         <h1>Login Page</h1>
