@@ -49,25 +49,49 @@ export default class Login extends Component{
   render(){
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { shouldRedirect } = this.state
-    
+
     return (
-      <div>
-        <h1>Login Page</h1>
-        <form onSubmit={ e => this.onFormSubmit(e) }>
-          <label>Username</label>
-          <input
-            type='text'
-            onChange={ this.handleChange('username') } />
-          <label>Password</label>
-          <input
-            type='text'
-            onChange={ this.handleChange('password') } />
-          <button type='submit'>Log In!</button>
-        </form>
-        {shouldRedirect && (
-          <Redirect to={ from } />
-        )}
-      </div>
+      <section className="login-section">
+        <h1 className="login-title">Login Page</h1>
+        <div className="columns">
+          <div className="column is-three-fifths is-offset-one-fifth">
+            <div className="columns">
+              <div class="column is-8 is-offset-2 login-form">
+                <form onSubmit={ e => this.onFormSubmit(e) }>
+                  <div className="field">
+                    <label>Username</label>
+                    <div className="control has-icons-left">
+                      <input
+                        type='text'
+                        className="input"
+                        onChange={ this.handleChange('username') } />
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-user"></i>
+                      </span>
+                    </div>
+                    <label>Password</label>
+                    <div className="control has-icons-left">
+                      <input
+                        type='text'
+                        className="input"
+                        onChange={ this.handleChange('password') } />
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <button type='submit' className="button is-primary is-outlined">Log In!</button>
+                </form>
+              {shouldRedirect && (
+                <Redirect to={ from } />
+              )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
     )
   }
 };
