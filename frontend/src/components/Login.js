@@ -30,7 +30,7 @@ export default class Login extends Component{
     const password = encodeURIComponent(this.state.password);
     const formData = `username=${username}&password=${password}`;
 
-    Users.post(formData).then( (res) => {
+    Users.login(formData).then( (res) => {
       if (res.data.success === false) {
         console.log(res.data.message)
 
@@ -56,7 +56,7 @@ export default class Login extends Component{
         <div className="columns">
           <div className="column is-three-fifths is-offset-one-fifth">
             <div className="columns">
-              <div class="column is-8 is-offset-2 login-form">
+              <div className="column is-8 is-offset-2 login-form">
                 <form onSubmit={ e => this.onFormSubmit(e) }>
                   <div className="field">
                     <label>Username</label>

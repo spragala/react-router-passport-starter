@@ -21,7 +21,10 @@ function signup (req, res) {
 
   let errors = req.validationErrors();
   if (errors) {
-    res.status(400).json(errors)
+    res.json({
+      errors: errors,
+      success: false
+    })
   } else {
     var newUser = new User({
       name: name,
