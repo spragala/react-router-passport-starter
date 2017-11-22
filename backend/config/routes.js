@@ -9,5 +9,6 @@ router.post('/login', usersController.login);
 
 //Post Routes
 router.get('/api/posts', textPostsController.index);
+router.post('/api/posts', textPostsController.create);
 
 module.exports = router;

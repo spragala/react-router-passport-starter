@@ -5,7 +5,11 @@ var TextPostSchema = new Schema({
   title: String,
   content: String,
   thumbnail_image_url: String,
-  votes: Number
+  user:
+  {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 module.exports = mongoose.model('TextPost', TextPostSchema);
