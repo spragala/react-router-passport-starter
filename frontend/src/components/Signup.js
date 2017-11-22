@@ -8,7 +8,12 @@ export default class Signup extends Component {
     super(props)
     this.state = {
       errors: {},
-      shouldRedirect: false
+      shouldRedirect: false,
+      username: '',
+      email: '',
+      name: '',
+      password: '',
+      password2: ''
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -32,7 +37,6 @@ export default class Signup extends Component {
 
     Users.signup(formData).then( (res) => {
       if (res.data.success === false) {
-        console.log(res.data.errors)
         this.setState({
           errors: res.data.errors,
           shouldRedirect: false
@@ -49,10 +53,19 @@ export default class Signup extends Component {
     const { from } = { from: { pathname: '/login' } }
     const { shouldRedirect } = this.state
 
+    if (this.state.errors.length > 0) {
+      var errorMsg = this.state.errors.map((error,i)=>{
+        return(
+          <p key={i} className="has-text-danger">*{error.msg}</p>
+        )
+      })
+    }
+
     return(
       <section className="signup-section">
         <div className="columns is-centered">
           <div className="column is-half">
+            {errorMsg}
             <div className="form">
               <h1 className="login-title has-text-centered has-text-weight-bold">Signup</h1>
               <form onSubmit={ e => this.onFormSubmit(e) }>

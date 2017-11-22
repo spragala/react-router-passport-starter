@@ -18,6 +18,7 @@ app.use(function(req, res, next) {
 // Parse body of requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 
 // Passport and session middleware
@@ -29,8 +30,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(expressValidator());
 
 // Use the route file
 app.use(backendRouter);
