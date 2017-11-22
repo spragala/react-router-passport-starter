@@ -15,8 +15,9 @@ export default class Auth {
     return localStorage.getItem('user');
   }
 
-  static logout() {
+  static logout(callback) {
     localStorage.removeItem('user')
+    setTimeout(callback, 100)
   }
 
 }
