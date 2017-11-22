@@ -10,6 +10,7 @@ export default class Login extends Component{
     this.state = {
       username: '',
       password: '',
+      error: '',
       shouldRedirect: false
     }
     this.handleChange = this.handleChange.bind(this)
@@ -31,21 +32,22 @@ export default class Login extends Component{
 
     Users.login(formData).then( (res) => {
       if (res.data.success === false) {
-        console.log(res.data.message)
+        this.setState({error: res.data.message})
+      } else {
+        Auth.authenticateUser(res.data.user._id)
 
+        this.setState({
+          user: res.data.user,
+          shouldRedirect: true
+        })
       }
-      Auth.authenticateUser(res.data.user._id)
-
-      this.setState({
-        user: res.data.user,
-        shouldRedirect: true
-      })
     })
   };
 
   render(){
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { shouldRedirect } = this.state
+    const { error } = this.state
 
     return (
       <section className="login-section">
@@ -54,6 +56,9 @@ export default class Login extends Component{
           <div className="column is-half">
             <div className="form">
               <h1 className="login-title has-text-centered has-text-weight-bold">Login Page</h1>
+
+              {error && <p className="has-text-danger has-text-centered">{ error }</p>}
+
               <form onSubmit={ e => this.onFormSubmit(e) }>
                 <div className="field">
                   <label className="is-invisible">Username</label>
