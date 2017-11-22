@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 const Navbar = withRouter(({ history }) => (
   <nav className="navbar" aria-label="main navigation">
     <div className="navbar-brand">
-      <a className="navbar-item app-title has-text-primary" href="/">React App</a>
+      <a className="navbar-item app-title" href="/">React App</a>
     </div>
 
     <div className="navbar-end">
@@ -21,10 +21,10 @@ const Navbar = withRouter(({ history }) => (
         <div className="navbar-item">
           <div className="field is-grouped">
             <p className="control">
-              <Link to="/login" className="button is-outlined">Log in</Link>
+              <Link to="/login" className="button is-inverted is-primary">Log in</Link>
             </p>
             <p className="control">
-              <Link to="/signup" className="button is-outlined">Sign up</Link>
+              <Link to="/signup" className="button is-primary">Sign up</Link>
             </p>
           </div>
         </div>
