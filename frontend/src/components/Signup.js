@@ -51,72 +51,84 @@ export default class Signup extends Component {
 
     return(
       <section className="signup-section">
-        <h1 className="login-title">Signup Page</h1>
-        <div className="columns">
-          <div className="column is-three-fifths is-offset-one-fifth">
-            <div className="columns">
-              <div className="column is-8 is-offset-2 login-form">
-                <form onSubmit={ e => this.onFormSubmit(e) }>
-                  <div className="field">
-                    <label>Username</label>
-                    <div className="control has-icons-left">
-                      <input
-                        type='text'
-                        className="input"
-                        onChange={ this.handleChange('username') } />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-user"></i>
-                      </span>
+        <div className="columns is-centered">
+          <div className="column is-half">
+            <div className="form">
+              <h1 className="login-title has-text-centered has-text-weight-bold">Signup</h1>
+              <form onSubmit={ e => this.onFormSubmit(e) }>
+                <div className="field">
+                  <label className="is-invisible">Username</label>
+                  <div className="control has-icons-left">
+                    <input
+                      type="text"
+                      placeholder="username"
+                      className="input"
+                      onChange={ this.handleChange('username') } />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-user"></i>
+                    </span>
+                  </div>
+                  <label className="is-invisible">Email</label>
+                  <div className="control has-icons-left">
+                    <input
+                      type="email"
+                      placeholder="email"
+                      className="input"
+                      onChange={ this.handleChange('email') } />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-envelope"></i>
+                    </span>
+                  </div>
+                  <label className="is-invisible">Name</label>
+                  <div className="control has-icons-left">
+                    <input
+                      type="text"
+                      placeholder="full name"
+                      className="input"
+                      onChange={ this.handleChange('name') } />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-address-card"></i>
+                    </span>
+                  </div>
+                  <label className="is-invisible">Password</label>
+                  <div className="control has-icons-left">
+                    <input
+                      type="text"
+                      placeholder="password"
+                      className="input"
+                      onChange={ this.handleChange('password') } />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-lock"></i>
+                    </span>
+                  </div>
+                  <label className="is-invisible">Password Confirmation</label>
+                  <div className="control has-icons-left">
+                    <input
+                      type='text'
+                      placeholder="Please re-enter your password."
+                      className="input"
+                      onChange={ this.handleChange('password2') } />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <button type="submit" className="button is-primary is-outlined">Signup!</button>
                     </div>
-                    <label>Email</label>
-                    <div className="control has-icons-left">
-                      <input
-                        type='email'
-                        className="input"
-                        onChange={ this.handleChange('email') } />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-envelope"></i>
-                      </span>
-                    </div>
-                    <label>Name</label>
-                    <div className="control has-icons-left">
-                      <input
-                        type='text'
-                        className="input"
-                        onChange={ this.handleChange('name') } />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-address-card"></i>
-                      </span>
-                    </div>
-                    <label>Password</label>
-                    <div className="control has-icons-left">
-                      <input
-                        type='text'
-                        className="input"
-                        onChange={ this.handleChange('password') } />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-lock"></i>
-                      </span>
-                    </div>
-                    <label>Password Confirmation</label>
-                    <div className="control has-icons-left">
-                      <input
-                        type='text'
-                        placeholder="Please re-enter your password."
-                        className="input"
-                        onChange={ this.handleChange('password2') } />
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-lock"></i>
-                      </span>
+                    <div className="level-item">
+                      <Link to="/login">Already a User? Login</Link>
                     </div>
                   </div>
-                  <button type='submit' className="button is-primary is-outlined">Signup!</button>
-                  <Link to="/login">Already a User? Login</Link>
-                </form>
-              {shouldRedirect && (
-                <Redirect to={ from } />
-              )}
-              </div>
+                </div>
+
+
+              </form>
+            {shouldRedirect && (
+              <Redirect to={ from } />
+            )}
             </div>
           </div>
         </div>
