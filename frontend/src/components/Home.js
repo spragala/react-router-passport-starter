@@ -1,7 +1,33 @@
-import React, { Component } from 'react';
 import Auth from '../models/Auth'
+import React, { Component } from 'react'
+import TextPost from '../models/TextPost'
+
 
 export default class Home extends Component{
+  constructor() {
+    super();
+
+    this.state = {
+      textPosts: ""
+    }
+  }
+
+  componentWillMount() {
+    this.getPosts();
+  }
+
+  getPosts() {
+    //get User by id
+    var userId = Auth.getUser()
+    //get posts by that user
+    TextPost.allUser(userId).then( (res) => {
+      console.log(res.data)
+      this.setState({
+        textPosts: res.data
+      })
+    })
+  }
+
   render(){
     return (
       <section className="home hero is-bold is-primary is-medium">
