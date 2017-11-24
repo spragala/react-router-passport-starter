@@ -1,6 +1,8 @@
 import Auth from '../models/Auth'
+import PostModel from '../models/TextPost'
 import React, { Component } from 'react'
-import TextPost from '../models/TextPost'
+import TextPost from './TextPost'
+
 
 
 export default class Home extends Component{
@@ -8,7 +10,7 @@ export default class Home extends Component{
     super();
 
     this.state = {
-      textPosts: ""
+      textPosts: []
     }
   }
 
@@ -20,8 +22,7 @@ export default class Home extends Component{
     //get User by id
     var userId = Auth.getUser()
     //get posts by that user
-    TextPost.allUser(userId).then( (res) => {
-      console.log(res.data)
+    PostModel.allUser(userId).then( (res) => {
       this.setState({
         textPosts: res.data
       })
@@ -29,20 +30,39 @@ export default class Home extends Component{
   }
 
   render(){
+    if(this.state.textPosts.length > 0) {
+      var posts = this.state.textPosts.map( (post) => {
+        return (
+          <TextPost
+            key={ post._id }
+            post={ post } />
+        )
+      })
+    }
+
     return (
-      <section className="home hero is-bold is-primary is-medium">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">Home</h1>
-            {Auth.isUserAuthenticated() ? (
-              <h2 className="subtitle">Welcome, you have successfully logged in.</h2>
-            ) : (
-              <h2 className="subtitle">You must be logged in to see this content.
-              </h2>
-            )}
+      <div className="home-page-wrapper">
+        <section className="home hero is-bold is-primary is-medium">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">Home</h1>
+              {Auth.isUserAuthenticated() ? (
+                <h2 className="subtitle">Welcome, you have successfully logged in.</h2>
+              ) : (
+                <h2 className="subtitle">You must be logged in to see this content.
+                </h2>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        {Auth.isUserAuthenticated() &&
+        <div className ="container text-posts">
+          { posts }
+          <hr />
+        </div> }
+
+      </div>
+
     )
   }
 };
