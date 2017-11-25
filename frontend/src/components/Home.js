@@ -1,4 +1,5 @@
 import Auth from '../models/Auth'
+import CreatePostForm from './CreatePostForm'
 import PostModel from '../models/TextPost'
 import React, { Component } from 'react'
 import TextPost from './TextPost'
@@ -12,6 +13,8 @@ export default class Home extends Component{
     this.state = {
       textPosts: []
     }
+    this.createPost = this.createPost.bind(this)
+    this.deletePost = this.deletePost.bind(this)
   }
 
   componentWillMount() {
@@ -29,12 +32,20 @@ export default class Home extends Component{
     })
   }
 
+  createPost(post) {
+    PostModel.create(post).then( (res) => {
+      let posts = this.state.textPosts
+      let newPosts = posts.push(res.data)
+      this.setState({ newPosts })
+    })
+  }
+
   deletePost(post) {
     PostModel.delete(post).then((res) => {
       let posts = this.state.textPosts.filter(function(post) {
         return post._id !== res.data._id
       })
-      this.setState({ 
+      this.setState({
         textPosts: posts
       })
     })
@@ -47,7 +58,7 @@ export default class Home extends Component{
           <TextPost
             key={ post._id }
             post={ post }
-            onDeletePost={this.deletePost.bind(this)}/>
+            onDeletePost={this.deletePost}/>
         )
       })
     }
@@ -59,7 +70,10 @@ export default class Home extends Component{
             <div className="container">
               <h1 className="title">Home</h1>
               {Auth.isUserAuthenticated() ? (
-                <h2 className="subtitle">Welcome, you have successfully logged in.</h2>
+                <div className="subtitle">
+                  <h2 className="logged-in-subtitle">Welcome, you have successfully logged in.</h2>
+                  <CreatePostForm createPost={ this.createPost }/>
+                </div>
               ) : (
                 <h2 className="subtitle">You must be logged in to see this content.
                 </h2>

@@ -33,3 +33,7 @@ nav {
 h3.post-title {
   margin: 0;
 }
+
+.logged-in-subtitle {
+  margin-bottom: 15px;
+}

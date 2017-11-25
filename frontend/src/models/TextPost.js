@@ -7,6 +7,11 @@ export default class TextPostModel {
     return request
   }
 
+  static create(post) {
+    let request = axios.post('/api/posts/', post)
+    return request
+  }
+
   static delete(postId) {
     let request = axios.delete('api/posts/' + postId)
     return request
