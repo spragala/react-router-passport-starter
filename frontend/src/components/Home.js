@@ -22,9 +22,20 @@ export default class Home extends Component{
     //get User by id
     var userId = Auth.getUser()
     //get posts by that user
-    PostModel.allUser(userId).then( (res) => {
+    PostModel.allUserPosts(userId).then( (res) => {
       this.setState({
         textPosts: res.data
+      })
+    })
+  }
+
+  deletePost(post) {
+    PostModel.delete(post).then((res) => {
+      let posts = this.state.textPosts.filter(function(post) {
+        return post._id !== res.data._id
+      })
+      this.setState({ 
+        textPosts: posts
       })
     })
   }
@@ -35,7 +46,8 @@ export default class Home extends Component{
         return (
           <TextPost
             key={ post._id }
-            post={ post } />
+            post={ post }
+            onDeletePost={this.deletePost.bind(this)}/>
         )
       })
     }
@@ -56,11 +68,10 @@ export default class Home extends Component{
           </div>
         </section>
         {Auth.isUserAuthenticated() &&
-        <div className ="container text-posts">
+        <div className ="column is-10 is-offset-1 text-posts">
           { posts }
           <hr />
         </div> }
-
       </div>
 
     )

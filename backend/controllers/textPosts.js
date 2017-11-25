@@ -11,12 +11,20 @@ function index(req, res) {
 
 function create(req, res) {
   TextPost.create(req.body, function(err, newTextPost) {
-    if (err) { res.send(err)}
+    if (err) {res.send(err)}
     else res.json(newTextPost)
+  });
+}
+
+function destroy(req, res) {
+  TextPost.findByIdAndRemove(req.params.post_id, function(err, foundPost) {
+    if (err) {res.send(err)}
+    else res.send(foundPost)
   });
 }
 
 module.exports ={
   index: index,
   create: create,
+  destroy: destroy,
 }

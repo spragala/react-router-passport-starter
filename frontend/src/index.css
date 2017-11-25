@@ -29,3 +29,7 @@ nav {
 .text-posts {
   margin-top: 24px;
 }
+
+h3.post-title {
+  margin: 0;
+}
