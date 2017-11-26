@@ -40,6 +40,10 @@ export default class Home extends Component{
     })
   }
 
+  editFormSubmit(post) {
+    console.log('submitting!', post)
+  }
+
   deletePost(post) {
     PostModel.delete(post).then((res) => {
       let posts = this.state.textPosts.filter(function(post) {
@@ -58,7 +62,8 @@ export default class Home extends Component{
           <TextPost
             key={ post._id }
             post={ post }
-            onDeletePost={this.deletePost}/>
+            onDeletePost={ this.deletePost }
+            onFormSubmit={ this.editFormSubmit.bind(this) }  />
         )
       })
     }
