@@ -40,8 +40,17 @@ export default class Home extends Component{
     })
   }
 
-  editFormSubmit(post) {
-    console.log('submitting!', post)
+  editFormSubmit(content, postId) {
+    // callback to find our updated post in posts array
+    function isUpdatedPost(post) {
+      return post.id === postId
+    }
+    PostModel.update(content, postId).then( (res) => {
+      let posts = this.state.posts
+      // find the update post and set the content to updated content
+        posts.find(isUpdatedPost).content = content
+        this.setState({posts: posts})
+    })
   }
 
   deletePost(post) {

@@ -9,7 +9,7 @@ export default class TextPost extends Component {
     }
     this.deletePost = this.deletePost.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
+    this.toggleEdit = this.toggleEdit.bind(this)
   }
 
   handleClick() {
@@ -18,9 +18,8 @@ export default class TextPost extends Component {
     })
   }
 
-  handleEdit() {
+  toggleEdit() {
     this.setState({editable: !this.state.editable})
-
   }
 
   handleChange(field) {
@@ -33,9 +32,11 @@ export default class TextPost extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    console.log('form submit', this.state.content)
+
     let post = this.state.content
-    this.props.onFormSubmit(post)
+    let postId = this.props.post._id
+    this.props.onFormSubmit(post, postId)
+    this.toggleEdit()
   }
 
   deletePost(e) {
@@ -59,10 +60,11 @@ export default class TextPost extends Component {
             <h3 className="post-title">{ this.props.post.title }</h3>
             {this.state.editable ? (
               <form onSubmit={ e => this.onFormSubmit(e) }>
-                <input
+                <textarea
                   defaultValue={ this.props.post.content }
-                  onChange={ this.handleChange('content') }></input>
-                <button type="submit"></button>
+                  className="input"
+                  onChange={ this.handleChange('content') }></textarea>
+                <button className="button is-primary" type="submit">Submit</button>
               </form>
             ) : (
               <p>{ this.props.post.content }</p>
@@ -73,7 +75,7 @@ export default class TextPost extends Component {
               <a className="level-item">
                 <span
                   className="icon is-small"
-                  onClick={ this.handleEdit } >
+                  onClick={ this.toggleEdit } >
                   <i className="fa fa-pencil-square-o"></i>
                 </span>
               </a>

@@ -16,4 +16,9 @@ export default class TextPostModel {
     let request = axios.delete('api/posts/' + postId)
     return request
   }
+
+  static update(post, postId) {
+    let request = axios.put('api/posts/' + postId, post)
+    return request
+  }
 }
