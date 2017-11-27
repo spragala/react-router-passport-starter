@@ -13,15 +13,22 @@ Built using the MERN stack and features:
 * [Axios](https://github.com/axios/axios)
 
 # Getting started
-Fork or clone the repo, `cd` into the main directory and `npm install` or `yarn install`.
+Once you've cloned the repo, `cd` into the main directory and `yarn install`.<br />
+`cd backend/` and `yarn install` <br />
+`cd frontend/` and `yarn install` <br />
 
-`cd backend` and `npm install` or `yarn install` <br />
-`cd frontend` and `npm install` or `yarn install` <br />
-`mongod` to run the MongoDb system <br />
-`cd ..` and `npm start` - [Concurrently](https://www.npmjs.com/package/concurrently) will start both servers and you'll be up and running.
+In a new terminal window run `mongod` to start the MongoDb system <br />
 
-<em>Note that while concurrently works well in development to help with CORS errors it is not recommended to use in a production environment.</em>
+In the main directory run `npm start`. [Concurrently](https://www.npmjs.com/package/concurrently) will start both the client and backend servers simultaneously.
+
+><em>Note that while concurrently works well in development to help with CORS errors it is not recommended to use in a production environment.</em>
 
 The app is not going to look very pretty at this point. Find the `bulma/` directory in `node_modules` (in the `frontend` directory) and copy and paste the `bulma.css` file into the `public` directory.
 
-Now you're ready to go. 
+Now you're ready to go.
+
+The app should look like this:
+
+<img width="1024" alt="screen shot 2017-11-27 at 9 50 04 am" src="https://user-images.githubusercontent.com/28071777/33281039-bce8df56-d358-11e7-8929-4ae240dee5e2.png" width="450"/>
+
+Happy coding! :computer:
