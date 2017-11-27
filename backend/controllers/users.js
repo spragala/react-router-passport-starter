@@ -19,34 +19,36 @@ function signup (req, res) {
     res.json({
       errors: errors,
       success: false
-    })
+    });
   } else {
     var newUser = new User({
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
       password: req.body.password
-    })
+    });
 
     User.createUser(newUser, function (err, user) {
         if (err) throw err;
         res.status(200).json({
           user: user,
           message: 'Sign up successful!'
-        })
+        });
     });
   }
-}; // <-- create
+};
 
 // Passport strategy
 passport.use(new LocalStrategy(
   function (username, password, done) {
+    // Use function from User model to get the user
     User.getUserByUsername(username, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false);
       }
 
+      // Compare function from User model to verify password
       User.comparePassword(password, user.password, function (err, isMatch) {
         if (err) { return done(err); }
 
@@ -60,10 +62,12 @@ passport.use(new LocalStrategy(
   }
 ));
 
+// get user.id to store it in session
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
+// get user object that belongs to session
 passport.deserializeUser(function (id, done) {
   User.getUserById(id, function (err, user) {
     done(err, user);
@@ -80,14 +84,14 @@ function login (req, res, next) {
         error: err
       });
     }
-
+    // login fail
     if (!user) {
       return res.json({
         success: false,
         message: 'Incorrect username or password'
       })
     }
-
+    // login success
     req.logIn(user, function(err) {
       if (err) return next(err);
     })

@@ -1,11 +1,11 @@
 import Auth from '../models/Auth'
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
-const Navbar = withRouter(({ history }) => (
-  <nav className="navbar" aria-label="main navigation">
+const Navbar = withRouter(({history}) => (
+  <nav className="navbar">
     <div className="navbar-brand">
-      <a className="navbar-item app-title" href="/">React App</a>
+      <Link to="/" className="navbar-item app-title">React App</Link>
       <div
         className="navbar-burger burger"
         data-target="nav-content"

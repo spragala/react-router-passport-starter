@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import Users from '../models/Users'
+import {Link, Redirect} from 'react-router-dom';
+import React, {Component} from 'react';
+import Users from '../models/Users';
 
-import { Link, Redirect } from 'react-router-dom'
 
-export default class Signup extends Component {
+
+class Signup extends Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
       errors: {},
       shouldRedirect: false,
@@ -14,8 +15,8 @@ export default class Signup extends Component {
       name: '',
       password: '',
       password2: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(field) {
@@ -23,42 +24,43 @@ export default class Signup extends Component {
       this.setState({
         [field]: e.target.value
       });
-    }
+    };
   }
 
   onFormSubmit(e) {
-    e.preventDefault()
-    const username = encodeURIComponent(this.state.username);
-    const email = encodeURIComponent(this.state.email);
-    const name = encodeURIComponent(this.state.name);
-    const password = encodeURIComponent(this.state.password);
-    const password2 = encodeURIComponent(this.state.password2);
-    const formData = `username=${username}&name=${name}&email=${email}&password=${password}&password2=${password2}`;
+    e.preventDefault();
+
+    const username = encodeURIComponent(this.state.username),
+          email = encodeURIComponent(this.state.email),
+          name = encodeURIComponent(this.state.name),
+          password = encodeURIComponent(this.state.password),
+          password2 = encodeURIComponent(this.state.password2),
+          formData = `username=${username}&name=${name}&email=${email}&password=${password}&password2=${password2}`;
 
     Users.signup(formData).then( (res) => {
       if (res.data.success === false) {
         this.setState({
           errors: res.data.errors,
           shouldRedirect: false
-        })
+        });
       } else {
         this.setState({
           shouldRedirect: true
-        })
+        });
       }
-    })
+    });
   }
 
   render() {
-    const { from } = { from: { pathname: '/login' } }
-    const { shouldRedirect } = this.state
+    const {from} = {from: {pathname: '/login'}}
+    const {shouldRedirect} = this.state
 
     if (this.state.errors.length > 0) {
       var errorMsg = this.state.errors.map((error,i)=>{
         return(
           <p key={i} className="has-text-danger">*{error.msg}</p>
         )
-      })
+      });
     }
 
     return(
@@ -68,7 +70,7 @@ export default class Signup extends Component {
             {errorMsg}
             <div className="form">
               <h1 className="login-title has-text-centered has-text-weight-bold">Signup</h1>
-              <form onSubmit={ e => this.onFormSubmit(e) }>
+              <form onSubmit={e => this.onFormSubmit(e)}>
                 <div className="field">
                   <label className="is-invisible">Username</label>
                   <div className="control has-icons-left">
@@ -76,7 +78,8 @@ export default class Signup extends Component {
                       type="text"
                       placeholder="username"
                       className="input"
-                      onChange={ this.handleChange('username') } />
+                      onChange={this.handleChange('username')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-user"></i>
                     </span>
@@ -87,7 +90,8 @@ export default class Signup extends Component {
                       type="email"
                       placeholder="email"
                       className="input"
-                      onChange={ this.handleChange('email') } />
+                      onChange={this.handleChange('email')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-envelope"></i>
                     </span>
@@ -98,7 +102,8 @@ export default class Signup extends Component {
                       type="text"
                       placeholder="full name"
                       className="input"
-                      onChange={ this.handleChange('name') } />
+                      onChange={this.handleChange('name')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-address-card"></i>
                     </span>
@@ -109,7 +114,8 @@ export default class Signup extends Component {
                       type="text"
                       placeholder="password"
                       className="input"
-                      onChange={ this.handleChange('password') } />
+                      onChange={this.handleChange('password')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-lock"></i>
                     </span>
@@ -120,7 +126,8 @@ export default class Signup extends Component {
                       type='text'
                       placeholder="Please re-enter your password."
                       className="input"
-                      onChange={ this.handleChange('password2') } />
+                      onChange={this.handleChange('password2')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-lock"></i>
                     </span>
@@ -136,18 +143,16 @@ export default class Signup extends Component {
                     </div>
                   </div>
                 </div>
-
-
               </form>
             {shouldRedirect && (
-              <Redirect to={ from } />
+              <Redirect to={from} />
             )}
             </div>
           </div>
         </div>
       </section>
-
     )
   }
-
 }
+
+export default Signup;

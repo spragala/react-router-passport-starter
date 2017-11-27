@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import Auth from '../models/Auth'
+import Auth from '../models/Auth';
+import React, {Component} from 'react';
 
-export default class CreatePostForm extends Component {
+
+class CreatePostForm extends Component {
   constructor() {
     super();
     this.state = {
       title: '',
       content: '',
       thumbnail_image_url: ''
-    }
-    this.toggleModal = this.toggleModal.bind(this)
+    };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   handleChange(field) {
@@ -17,43 +18,45 @@ export default class CreatePostForm extends Component {
       this.setState({
         [field]: e.target.value
       });
-    }
+    };
   }
 
   onFormSubmit(e) {
     e.preventDefault()
-    let user = Auth.getUser()
-    let post = this.state
-    post.user = user
-    this.props.createPost(post)
+
+    let user = Auth.getUser();
+    let post = this.state;
+    post.user = user;
+    this.props.createPost(post);
     this.toggleModal();
   };
 
   toggleModal() {
-    let modal = document.querySelector(".modal")
-    modal.classList.toggle('is-active')
+    let modal = document.querySelector(".modal");
+    modal.classList.toggle('is-active');
   }
 
   render() {
-
     return (
       <div className="create-btn">
 
         <a
           className="button is-primary is-inverted"
-          onClick={ this.toggleModal }>Post!</a>
+          onClick={this.toggleModal}>Post!
+        </a>
 
         <div className="modal">
-          <div className="modal-background" onClick={ this.toggleModal }></div>
+          <div className="modal-background" onClick={this.toggleModal}></div>
           <div className="modal-card">
             <header className="modal-card-head">
               <p className="modal-card-title">Post Something!</p>
               <button
                 className="delete"
                 aria-label="close"
-                onClick={ this.toggleModal }></button>
+                onClick={this.toggleModal}></button>
             </header>
-            <form onSubmit={ e => this.onFormSubmit(e) }>
+
+            <form onSubmit={e => this.onFormSubmit(e)}>
               <section className="modal-card-body">
                 <div className="field">
                   <label className="label">Title</label>
@@ -61,7 +64,8 @@ export default class CreatePostForm extends Component {
                     <input
                       type="text"
                       className="input"
-                      onChange={ this.handleChange('title') } />
+                      onChange={this.handleChange('title')}
+                    />
                   </div>
                 </div>
                 <div className="field">
@@ -71,7 +75,8 @@ export default class CreatePostForm extends Component {
                       type="text"
                       className="input"
                       placeholder="http://..."
-                      onChange={ this.handleChange('thumbnail_image_url') } />
+                      onChange={this.handleChange('thumbnail_image_url')}
+                    />
                   </div>
                 </div>
                 <div className="field">
@@ -80,21 +85,23 @@ export default class CreatePostForm extends Component {
                     <textarea
                       className="textarea"
                       placeholder="What do you want to say?"
-                      onChange={ this.handleChange('content') }></textarea>
+                      onChange={this.handleChange('content')}
+                    />
                   </div>
                 </div>
               </section>
               <footer className="modal-card-foot">
                 <button
                   type="submit"
-                  className="button is-dark is-outlined">Create</button>
+                  className="button is-dark is-outlined">Create
+                </button>
               </footer>
             </form>
           </div>
         </div>
-
       </div>
-
     )
   }
 }
+
+export default CreatePostForm;

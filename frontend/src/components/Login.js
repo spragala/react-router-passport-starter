@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import Users from '../models/Users'
-import Auth from '../models/Auth'
+import Auth from '../models/Auth';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import Users from '../models/Users';
 
-import { Redirect } from 'react-router-dom'
-
-export default class Login extends Component{
+class Login extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -45,9 +44,9 @@ export default class Login extends Component{
   };
 
   render(){
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { shouldRedirect } = this.state
-    const { error } = this.state
+    const {from} = this.props.location.state || {from: {pathname: '/'}}
+    const {shouldRedirect} = this.state
+    const {error} = this.state
 
     return (
       <section className="login-section">
@@ -57,9 +56,9 @@ export default class Login extends Component{
             <div className="form">
               <h1 className="login-title has-text-centered has-text-weight-bold">Login Page</h1>
 
-              {error && <p className="has-text-danger has-text-centered">{ error }</p>}
+              {error && <p className="has-text-danger has-text-centered">{error}</p>}
 
-              <form onSubmit={ e => this.onFormSubmit(e) }>
+              <form onSubmit={e => this.onFormSubmit(e)}>
                 <div className="field">
                   <label className="is-invisible">Username</label>
                   <div className="control has-icons-left">
@@ -67,7 +66,7 @@ export default class Login extends Component{
                       type="text"
                       className="input"
                       placeholder="username"
-                      onChange={ this.handleChange('username') } />
+                      onChange={this.handleChange('username')} />
                     <span className="icon is-small is-left">
                       <i className="fa fa-user"></i>
                     </span>
@@ -78,16 +77,19 @@ export default class Login extends Component{
                       type="text"
                       className="input"
                       placeholder="password"
-                      onChange={ this.handleChange('password') } />
+                      onChange={this.handleChange('password')} />
                     <span className="icon is-small is-left">
                       <i className="fa fa-lock"></i>
                     </span>
                   </div>
                 </div>
-                <button type="submit" className="button is-primary is-outlined">Log In!</button>
+                <button
+                  type="submit"
+                  className="button is-primary is-outlined">Log In!
+                </button>
               </form>
             {shouldRedirect && (
-              <Redirect to={ from } />
+              <Redirect to={from} />
             )}
             </div>
           </div>
@@ -95,5 +97,6 @@ export default class Login extends Component{
       </section>
     )
   }
+}
 
-};
+export default Login;

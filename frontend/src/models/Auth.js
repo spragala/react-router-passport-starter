@@ -1,4 +1,4 @@
-export default class Auth {
+class Auth {
 
   static authenticateUser(user) {
     localStorage.setItem('user', user);
@@ -14,7 +14,9 @@ export default class Auth {
 
   static logout(callback) {
     localStorage.removeItem('user')
-    setTimeout(callback, 100)
+    setTimeout(callback, 100);
   }
 
 }
+
+export default Auth;
