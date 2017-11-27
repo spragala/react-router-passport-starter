@@ -28,7 +28,8 @@ The app is not going to look very pretty at this point. Find the `bulma/` direct
 Now you're ready to go.
 
 The app should look like this:
-
-<img width="1024" alt="screen shot 2017-11-27 at 9 50 04 am" src="https://user-images.githubusercontent.com/28071777/33281039-bce8df56-d358-11e7-8929-4ae240dee5e2.png" width="450"/>
+<kbd>
+  <img width="1024" alt="screen shot 2017-11-27 at 9 50 04 am" src="https://user-images.githubusercontent.com/28071777/33281039-bce8df56-d358-11e7-8929-4ae240dee5e2.png" width="450" style="border: 1px solid black"/>
+</kbd>
 
 Happy coding! :computer:

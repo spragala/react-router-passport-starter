@@ -66,7 +66,8 @@ class Login extends Component{
                       type="text"
                       className="input"
                       placeholder="username"
-                      onChange={this.handleChange('username')} />
+                      onChange={this.handleChange('username')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-user"></i>
                     </span>
@@ -77,7 +78,8 @@ class Login extends Component{
                       type="text"
                       className="input"
                       placeholder="password"
-                      onChange={this.handleChange('password')} />
+                      onChange={this.handleChange('password')}
+                    />
                     <span className="icon is-small is-left">
                       <i className="fa fa-lock"></i>
                     </span>
@@ -88,9 +90,7 @@ class Login extends Component{
                   className="button is-primary is-outlined">Log In!
                 </button>
               </form>
-            {shouldRedirect && (
-              <Redirect to={from} />
-            )}
+            {shouldRedirect && ( <Redirect to={from} /> )}
             </div>
           </div>
         </div>
