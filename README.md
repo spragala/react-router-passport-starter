@@ -1,6 +1,6 @@
 # React Starter Code
 When I was an instructional assistant at a coding bootcamp in San Francisco I had several students that wanted to do their final projects in React but struggled with getting Auth to work with their apps. It inspired me to make some starter code that would work for small projects like the ones my students were making.
-<br/><em>This project is still a WIP so feel free to contribute or make suggestions.</em>
+
 
 Built using the MERN stack and features:
 * [create-react-app](https://github.com/facebookincubator/create-react-app)
@@ -15,8 +15,13 @@ Built using the MERN stack and features:
 # Getting started
 Fork or clone the repo, `cd` into the main directory and `npm install` or `yarn install`.
 
-`cd frontend` and `npm install` or `yarn install` <br />
 `cd backend` and `npm install` or `yarn install` <br />
+`cd frontend` and `npm install` or `yarn install` <br />
+`mongod` to run the MongoDb system <br />
 `cd ..` and `npm start` - [Concurrently](https://www.npmjs.com/package/concurrently) will start both servers and you'll be up and running.
 
-<em>**Note that while concurrently works well in development to help with CORS errors it is not recommended to use in a production environment.</em>
+<em>Note that while concurrently works well in development to help with CORS errors it is not recommended to use in a production environment.</em>
+
+The app is not going to look very pretty at this point. Find the `bulma/` directory in `node_modules` (in the `frontend` directory) and copy and paste the `bulma.css` file into the `public` directory.
+
+Now you're ready to go. 
